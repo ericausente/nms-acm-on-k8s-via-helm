@@ -6,15 +6,16 @@ Contents
 
 The repository contains the following files:
 
-    install.sh: A Bash script to install the ACM Module along with the NMS using Helm.
-    uninstall.sh: A Bash script to uninstall the NMS and ACM Module using Helm.
-    values.yaml: A YAML file that contains configuration settings for the installation process.
+- install.sh: A Bash script to install the ACM Module along with the NMS using Helm.
+- uninstall.sh: A Bash script to uninstall the NMS and ACM Module using Helm.
+- values.yaml: A YAML file that contains configuration settings for the installation process.
 
 Installation
 
 To install the API Connectivity Manager (ACM) Module along with the NMS, follow these steps:
 
 - Make sure you have Helm installed on your system.
+- Dependencies with Instance Manager: Refer to the table to see the module compatibility for each NGINX Management Suite chart https://docs.nginx.com/nginx-management-suite/installation/kubernetes/deploy-api-connectivity-manager/
 - Open a terminal and navigate to the repository directory.
 - Modify to replace the parameters inside the values.yaml file with the details (e.g., URL and port of your private Docker registry, if applicable) among others. Replace <version> with the tag you noted when loading the Docker image.
 - Run the install.sh script:
@@ -65,5 +66,19 @@ integrations-7d55f748c7-9fnn6   1/1     Running   0          26s
 ```
 
 The output will display the list of pods along with their status.
+
+```
+% kubectl get service -n nms
+NAME           TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                      AGE
+acm            ClusterIP      10.0.173.208   <none>           8037/TCP                     130m
+apigw          LoadBalancer   10.0.147.111   20.XXX.XXX.109   443:32720/TCP                130m
+clickhouse     ClusterIP      10.0.88.87     <none>           9000/TCP,8123/TCP            130m
+core           ClusterIP      10.0.121.125   <none>           8033/TCP,8038/TCP,7891/TCP   130m
+dpm            ClusterIP      10.0.12.49     <none>           8034/TCP,8036/TCP,9100/TCP   130m
+ingestion      ClusterIP      10.0.153.50    <none>           8035/TCP                     130m
+integrations   ClusterIP      10.0.141.80    <none>           8037/TCP                     130m
+```
+
+Access https://20.XXX.XXX.109/ from your browser. 
 
 Note: Make sure you have the necessary permissions and configurations in your Kubernetes cluster to successfully install and run the NMS and ACM Module.
