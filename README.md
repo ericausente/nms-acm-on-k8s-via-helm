@@ -2,7 +2,6 @@
 
 
 This repository contains the necessary files to install and uninstall the API Connectivity Manager (ACM) Module for the NGINX management Suite  (NMS). The ACM Module enables API connectivity management and provides additional functionality to the NMS system.
-Contents
 
 The repository contains the following files:
 
